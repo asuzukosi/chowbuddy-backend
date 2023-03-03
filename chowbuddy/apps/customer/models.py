@@ -12,7 +12,7 @@ class Customer(models.Model):
     
     
 
-class FriendShip(models.Model):
+class Friendship(models.Model):
     friend1 = models.ForeignKey(Customer, on_delete=models.CASCADE)
     friend2 = models.ForeignKey(Customer, on_delete=models.CASCADE)
     accepted = models.BooleanField(default=False)

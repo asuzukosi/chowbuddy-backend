@@ -37,6 +37,10 @@ THIRD_PARTY = [
     "rest_framework",
 ]
 
+INTERNAL_APPS = [
+    "authentication"
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-] + THIRD_PARTY
+] + THIRD_PARTY + INTERNAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -57,6 +61,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'chowbuddy.urls'
+
+
+# DEFINE CUSTOM USER MODEL
+AUTH_USER_MODEL = "authentication.CustomUser"
 
 TEMPLATES = [
     {
