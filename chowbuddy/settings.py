@@ -35,10 +35,14 @@ ALLOWED_HOSTS = []
 
 THIRD_PARTY = [
     "rest_framework",
+    "drf_spectacular",
+    "rest_framework_simplejwt",
+    
 ]
 
 INTERNAL_APPS = [
-    "authentication"
+    "authentication",
+    
 ]
 
 INSTALLED_APPS = [
@@ -138,3 +142,18 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'ChowBuddy Project API',
+    'DESCRIPTION': 'This is the rest api service for the chowbuddy project',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
