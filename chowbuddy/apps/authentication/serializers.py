@@ -90,10 +90,10 @@ class DelivererTokenObtainPairSerializer(TokenObtainPairSerializer):
         
         return data
     
-    class CustomBaseUserSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = CustomUser
-            fields = ["id", "username", "first_name", "last_name", "email"]
+class CustomBaseUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ["id", "username", "first_name", "last_name", "email"]
 
 
 
