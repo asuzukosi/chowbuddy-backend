@@ -5,4 +5,4 @@ router = SimpleRouter()
 router.register(r'communities', CommunityViewSet, basename="communities")
 router.register(r'posts', PostViewSet, basename="posts")
 
-urls = router.urls
+urlpatterns = router.urls

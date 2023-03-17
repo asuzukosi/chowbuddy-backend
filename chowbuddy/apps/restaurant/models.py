@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 # Create your models here.
 
 class Restaurant(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)    
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="restaurant")    
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
