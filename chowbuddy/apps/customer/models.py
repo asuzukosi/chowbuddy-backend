@@ -9,12 +9,6 @@ class Customer(models.Model):
     email = models.EmailField(max_length=100)
     phone_number = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
-    
-    
-
-class Friendship(models.Model):
-    friend1 = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    friend2 = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    accepted = models.BooleanField(default=False)
+    friends = models.ManyToManyField("Customer", blank=True, related_name="friendships")
     
     

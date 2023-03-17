@@ -12,11 +12,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import sys
-from os import path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-sys.path.append(path.join(BASE_DIR, 'apps'));
+PROJECT_ROOT = os.path.dirname(__file__)
+sys.path.insert(0, os.path.join(PROJECT_ROOT, "apps"))
 
 
 # Quick-start development settings - unsuitable for production
@@ -42,7 +43,11 @@ THIRD_PARTY = [
 
 INTERNAL_APPS = [
     "authentication",
-    
+    "community",
+    "customer",
+    "delivery",
+    "meal",
+    "restaurant",
 ]
 
 INSTALLED_APPS = [
