@@ -44,7 +44,7 @@ class Dish(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField()
     image = models.ImageField(upload_to='dish_images')
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name="dishes")
     
     def __str__(self):
         return f"{self.restaurant} -> {self.name} + {self.price}"
