@@ -9,7 +9,6 @@ class RestaurantViewSet(ModelViewSet):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
 
-
 class DishViewSet(ModelViewSet):
     queryset = Dish.objects.all()
     serializer_class = DishSerializer

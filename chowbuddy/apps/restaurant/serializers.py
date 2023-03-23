@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 from restaurant.models import Restaurant, Dish
 
 
@@ -12,3 +13,4 @@ class DishSerializer(ModelSerializer):
     class Meta:
         model = Dish
         fields = "__all__"
+    
