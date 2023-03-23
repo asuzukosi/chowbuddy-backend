@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from restaurant.models import Restaurant
 from customer.models import Customer
 # Create your models here.
+
 class Deliverer(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name="deliverer")
     location = models.CharField(max_length=100)
