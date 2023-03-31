@@ -15,6 +15,17 @@ class DelivererManager(models.Manager):
 class Deliverer(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name="deliverer")
     location = models.CharField(max_length=100)
+    longitude = models.FloatField(default=0.00, blank=True, null=True)
+    latitude = models.FloatField(default=0.00, blank=True, null=True)
+    
+    
+    def setLongLat(self, longitude, latitude):
+        self.longitude = longitude
+        self.latitude = latitude
+        self.save()
+        
+
+DELIVERY_STATUSES = [["PENDING", "PENDING"], ["COMPLETED", "COMPLETE"]]
 
 class Delivery(models.Model):
     deliverer = models.ForeignKey(Deliverer, on_delete=models.CASCADE)
@@ -22,7 +33,11 @@ class Delivery(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     restaurantLocation = models.CharField(max_length=100)
     customerLocation = models.CharField(max_length=100)
-    status = models.CharField(max_length=100)
+    status = models.CharField(max_length=100, choices=DELIVERY_STATUSES, default="PENDING")
     created_at = models.DateTimeField(auto_now_add=True)
     delivered_at = models.DateTimeField(auto_now=True)
     
+    
+    def complete(self):
+        self.status = "COMPLETED"
+        self.save()

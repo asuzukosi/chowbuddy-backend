@@ -19,3 +19,6 @@ class RegisterCustomerSerializer(serializers.Serializer):
     phone_number = serializers.CharField()
     address = serializers.CharField()
 
+class UpdateCustomerLocationSerializer(serializers.Serializer):
+    longitude = serializers.FloatField()
+    latitude = serializers.FloatField()

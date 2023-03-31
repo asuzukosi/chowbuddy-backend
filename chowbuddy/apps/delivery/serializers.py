@@ -18,3 +18,8 @@ class RegisterDelivererSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
     location = serializers.CharField()
+
+
+class UpdateDelivererLocationSerializer(serializers.Serializer):
+    longitude = serializers.FloatField()
+    latitude = serializers.FloatField()
