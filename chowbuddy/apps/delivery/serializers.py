@@ -23,3 +23,7 @@ class RegisterDelivererSerializer(serializers.Serializer):
 class UpdateDelivererLocationSerializer(serializers.Serializer):
     longitude = serializers.FloatField()
     latitude = serializers.FloatField()
+    
+class GetNearestDelivererSerializer(serializers.Serializer):
+    longitude = serializers.FloatField()
+    latitude = serializers.FloatField()

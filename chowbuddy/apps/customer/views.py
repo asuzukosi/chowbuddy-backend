@@ -3,6 +3,7 @@ from rest_framework.viewsets import ModelViewSet
 from customer.models import Customer
 from customer.serializers import CustomerSerializer, RegisterCustomerSerializer, UpdateCustomerLocationSerializer
 from community.serializers import CommunitySerializer
+from meal.serializers import MealPlanSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import action
 
@@ -40,6 +41,14 @@ class CustomerViewSet(ModelViewSet):
         serializer.is_valid(raise_exception=True)
         customer.setLongLat(**serializer.data)
         return Response({"message": "success"}, 200)
+    
+    @action(methods=["get"], detail=True)
+    def get_all_my_meal_plans(self, request, id, *args, **kwargs):
+        customer:Customer = Customer.objects.get(id=id)
+        mealPlans = customer.getMealPlans()
+        serializer = MealPlanSerializer(instance=mealPlans, many=True)
+        return Response(serializer.data, 200)
+        
         
 
 

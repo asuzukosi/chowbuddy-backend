@@ -24,6 +24,11 @@ class Deliverer(models.Model):
         self.latitude = latitude
         self.save()
         
+    @staticmethod
+    def getClosestDeliverers(self, longitude, latitude):
+        # perform calculation to get all nearby deliverers
+        return Deliverer.objects.all()
+        
 
 DELIVERY_STATUSES = [["PENDING", "PENDING"], ["COMPLETED", "COMPLETE"]]
 
@@ -31,8 +36,6 @@ class Delivery(models.Model):
     deliverer = models.ForeignKey(Deliverer, on_delete=models.CASCADE)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    restaurantLocation = models.CharField(max_length=100)
-    customerLocation = models.CharField(max_length=100)
     status = models.CharField(max_length=100, choices=DELIVERY_STATUSES, default="PENDING")
     created_at = models.DateTimeField(auto_now_add=True)
     delivered_at = models.DateTimeField(auto_now=True)

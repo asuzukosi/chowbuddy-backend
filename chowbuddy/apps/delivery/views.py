@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from delivery.serializers import DelivererSerializer, DeliverySerializer, RegisterDelivererSerializer, UpdateDelivererLocationSerializer
+from delivery.serializers import DelivererSerializer,DeliverySerializer, RegisterDelivererSerializer, UpdateDelivererLocationSerializer, GetNearestDelivererSerializer
 from delivery.models import Deliverer, Delivery
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -24,6 +24,14 @@ class DelivererViewSet(ModelViewSet):
         serializer.is_valid(raise_exception=True)
         deliverer.setLongLat(**serializer.data)
         return Response({"message": "success"}, 200)
+    
+    @action(methods=["post"], detail=False)
+    def get_closest_deliverers(self, request, *args, **kwargs):
+        serializer = GetNearestDelivererSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        deliverers = Deliverer.getClosestDeliverers(**serializer.data)
+        serializer = DelivererSerializer(data=deliverers)
+        return Response(serializer.data, 200)
     
     
     

@@ -32,16 +32,19 @@ class Customer(models.Model):
         return self.user
     
     def getMyCommunities(self):
-        return self.user.community_members
+        return self.user.community_members.all()
     
     def getSuggestedCommunites(self):
         allCommunites = Community.objects.all()
-        suggestedCommunities = [community for community in allCommunites if community not in self.user.community_members]
+        suggestedCommunities = [community for community in allCommunites if community not in self.user.community_members.all()]
         return suggestedCommunities
     
     def setLongLat(self, longitude, latitude):
         self.longitude = longitude
         self.latitude = latitude
         self.save()
+        
+    def getMealPlans(self):
+        return self.user.meal_plans.all()
     
     
