@@ -1,9 +1,11 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from customer.models import Customer
+from authentication.serializers import CustomBaseUserSerializer
 
 
 class CustomerSerializer(ModelSerializer):
+    user = CustomBaseUserSerializer()
     class Meta:
         model = Customer
         fields = '__all__'
@@ -16,7 +18,6 @@ class RegisterCustomerSerializer(serializers.Serializer):
     first_name = serializers.CharField()
     last_name = serializers.CharField()
     email = serializers.EmailField()
-    phone_number = serializers.CharField()
     address = serializers.CharField()
 
 class UpdateCustomerLocationSerializer(serializers.Serializer):

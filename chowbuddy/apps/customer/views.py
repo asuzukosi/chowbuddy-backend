@@ -15,7 +15,7 @@ class CustomerViewSet(ModelViewSet):
     
     def create(self, request, *args, **kwargs):
         serializer = RegisterCustomerSerializer(data=request.data)
-        serializer.is_valid(raise_exceptions=True)
+        serializer.is_valid(raise_exception=True)
         customer = Customer.objects.create(**serializer.data)
         serializer = CustomerSerializer(instance=customer)
         return Response(serializer.data, 201)

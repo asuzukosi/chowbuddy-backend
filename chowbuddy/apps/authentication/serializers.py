@@ -27,7 +27,17 @@ class CustomerTokenObtainPairSerializer(TokenObtainPairSerializer):
         data["user_id"] = user.id
         data["username"] = user.username
         data["email"] = user.email
-        data["phone_number"] = customer.phone_number
+        data["user"] = {
+            "id": user.id,
+            "username": user.username,
+            "email": user.email
+        }
+        data["type"] = "customer"
+        data["first_name"] = customer.first_name
+        data["last_name"] = customer.last_name
+        data["longitude"] = customer.longitude
+        data["latitude"] = customer.latitude
+        data["address"] = customer.address
         data["token"] = data["access"]
         
         
@@ -93,7 +103,7 @@ class DelivererTokenObtainPairSerializer(TokenObtainPairSerializer):
 class CustomBaseUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ["id", "username", "first_name", "last_name", "email"]
+        fields = ["id", "username", "email"]
 
 
 

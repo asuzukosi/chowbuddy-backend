@@ -6,7 +6,7 @@ from community.models import Community
 
 class CustomerManager(models.Manager):
     def create(self, username:str, email:str, password:str,*args,  **kwargs):
-        if get_user_model.objects.filter(username=username, email=email).exists():
+        if get_user_model().objects.filter(username=username, email=email).exists():
             raise Exception('Customer already exists')
         user = get_user_model().objects.create(username=username, email=email, password=password)
         user.set_password(password)
@@ -19,7 +19,6 @@ class Customer(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
-    phone_number = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     friends = models.ManyToManyField("Customer", blank=True, related_name="friendships")
     longitude = models.FloatField(default=0.0, blank=True, null=True)
@@ -29,7 +28,7 @@ class Customer(models.Model):
     objects = CustomerManager()
     
     def __str__(self):
-        return self.user
+        return self.user.username
     
     def getMyCommunities(self):
         return self.user.community_members.all()
