@@ -30,7 +30,8 @@ class CustomerTokenObtainPairSerializer(TokenObtainPairSerializer):
         data["user"] = {
             "id": user.id,
             "username": user.username,
-            "email": user.email
+            "email": user.email,
+            "profile_picure": user.profile_picure
         }
         data["type"] = "customer"
         data["first_name"] = customer.first_name
@@ -103,7 +104,7 @@ class DelivererTokenObtainPairSerializer(TokenObtainPairSerializer):
 class CustomBaseUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ["id", "username", "email"]
+        fields = ["id", "username", "email", "profile_picture"]
 
 
 

@@ -49,6 +49,7 @@ INTERNAL_APPS = [
     "delivery",
     "meal",
     "restaurant",
+    "categories",
 ]
 
 INSTALLED_APPS = [
@@ -144,6 +145,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
+print("Media root is: ", MEDIA_ROOT)
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

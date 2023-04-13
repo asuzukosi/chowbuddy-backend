@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
      # YOUR PATTERNS
@@ -32,4 +33,4 @@ urlpatterns = [
     path('', include('delivery.urls')),
     path('', include('meal.urls')),
     path('', include('restaurant.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
