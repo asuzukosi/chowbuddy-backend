@@ -21,8 +21,8 @@ class RestaurantViewSet(ModelViewSet):
     search_fields = ["description"]
     
     @action(methods=["get"], detail=True)
-    def dishes(self, request, id,  *args, **kwargs):
-        restaurant = Restaurant.objects.get(id=id)
+    def dishes(self, request, pk,  *args, **kwargs):
+        restaurant = Restaurant.objects.get(id=pk)
         dishes = Dish.objects.filter(restaurant=restaurant)
         serializer = DishSerializer(instance=dishes, many=True)
         return Response(serializer.data, 200)
