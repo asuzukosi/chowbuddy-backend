@@ -16,9 +16,9 @@ class RestaurantViewSet(ModelViewSet):
         filters.OrderingFilter,
         filters.SearchFilter,
     ]
-    filterset_fields = ["name"]
+    filterset_fields = ["name", "categories"]
     ordering_fields = ["name"]
-    search_fields = ["description"]
+    search_fields = ["description", "name",]
     
     @action(methods=["get"], detail=True)
     def dishes(self, request, pk,  *args, **kwargs):
@@ -27,7 +27,6 @@ class RestaurantViewSet(ModelViewSet):
         serializer = DishSerializer(instance=dishes, many=True)
         return Response(serializer.data, 200)
         
-
 class DishViewSet(ModelViewSet):
     queryset = Dish.objects.all()
     serializer_class = DishSerializer

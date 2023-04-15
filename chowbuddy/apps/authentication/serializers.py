@@ -31,7 +31,7 @@ class CustomerTokenObtainPairSerializer(TokenObtainPairSerializer):
             "id": user.id,
             "username": user.username,
             "email": user.email,
-            "profile_picure": user.profile_picture.url
+            "profile_picture": user.profile_picture.url
         }
         data["type"] = "customer"
         data["first_name"] = customer.first_name

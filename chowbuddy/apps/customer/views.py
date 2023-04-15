@@ -6,6 +6,7 @@ from community.serializers import CommunitySerializer
 from meal.serializers import MealPlanSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from django.contrib.auth import get_user_model
 
 
 # Create your views here.
@@ -21,15 +22,17 @@ class CustomerViewSet(ModelViewSet):
         return Response(serializer.data, 201)
     
     @action(methods=["get"], detail=True)
-    def my_communities(self, request, id,  *args, **kwargs):
-        customer:Customer = Customer.objects.get(id=id)
+    def my_communities(self, request, pk,  *args, **kwargs):
+        user = get_user_model().objects.get(id=pk)
+        customer:Customer = Customer.objects.get(user=user)
         communities = customer.getMyCommunities()
         serializer = CommunitySerializer(instance=communities, many=True)
         return Response(serializer.data, 200)
     
     @action(methods=["get"], detail=True)
-    def suggested_communities(self, request, id,  *args, **kwargs):
-        customer:Customer = Customer.objects.get(id=id)
+    def suggested_communities(self, request, pk,  *args, **kwargs):
+        user = get_user_model().objects.get(id=pk)
+        customer:Customer = Customer.objects.get(user=user)
         communities = customer.getSuggestedCommunites()
         serializer = CommunitySerializer(instance=communities, many=True)
         return Response(serializer.data, 200)

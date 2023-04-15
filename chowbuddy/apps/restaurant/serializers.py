@@ -10,6 +10,7 @@ class RestaurantSerializer(ModelSerializer):
 
 
 class DishSerializer(ModelSerializer):
+    restaurant = RestaurantSerializer()
     class Meta:
         model = Dish
         fields = "__all__"
