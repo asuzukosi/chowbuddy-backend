@@ -7,12 +7,22 @@ from meal.serializers import MealPlanSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.contrib.auth import get_user_model
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 
 # Create your views here.
 class CustomerViewSet(ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.OrderingFilter,
+        filters.SearchFilter,
+    ]
+    filterset_fields = ["user"]
+    ordering_fields = ["user"]
+    search_fields = ["user"]
     
     def create(self, request, *args, **kwargs):
         serializer = RegisterCustomerSerializer(data=request.data)

@@ -10,12 +10,12 @@ class DelivererViewSet(ModelViewSet):
     queryset = Deliverer.objects.all()
     serializer_class = DelivererSerializer
     
-    def create(self, request, *args, **kwargs):
-        serializer = RegisterDelivererSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        deliverer = Deliverer.objects.create(**serializer.data)
-        serializer = DelivererSerializer(instance=deliverer)
-        return Response(serializer.data, 201)
+    # def create(self, request, *args, **kwargs):
+    #     serializer = RegisterDelivererSerializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     deliverer = Deliverer.objects.create(**serializer.data)
+    #     serializer = DelivererSerializer(instance=deliverer)
+    #     return Response(serializer.data, 201)
     
     @action(methods=["post"], detail=True)
     def update_longlat(self, request, id, *args, **kwargs):

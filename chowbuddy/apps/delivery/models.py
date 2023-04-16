@@ -12,6 +12,8 @@ class DelivererManager(models.Manager):
         user.save()
         
         return super().create(user, **kwargs)
+    
+
 class Deliverer(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name="deliverer")
     location = models.CharField(max_length=100)

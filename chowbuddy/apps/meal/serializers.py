@@ -1,6 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from meal.models import Meal, DishOrder, MealOrder, MealPlan
 from rest_framework import serializers
+from restaurant.serializers import DishSerializer
 class MealSerializer(ModelSerializer):
     class Meta:
         model = Meal
@@ -11,7 +12,25 @@ class DishOrderSerializer(ModelSerializer):
         model = DishOrder
         fields = "__all__"
         
+class DishOrderFullSerializer(ModelSerializer):
+    dish = DishSerializer()
+    class Meta:
+        model = DishOrder
+        fields = "__all__"
+
+class MealFullSerializer(ModelSerializer):
+    dish_orders = DishOrderFullSerializer(many=True)
+    class Meta:
+        model = Meal
+        fields = "__all__"
+        
 class MealOrderSerializer(ModelSerializer):
+    class Meta:
+        model = MealOrder
+        fields = "__all__"
+        
+class MealOrderFullSerializer(ModelSerializer):
+    meal = MealFullSerializer()
     class Meta:
         model = MealOrder
         fields = "__all__"
@@ -28,9 +47,9 @@ class DishOrderSerializer(serializers.Serializer):
     amount = serializers.FloatField()
     
 
-class CreateOrderSerializer(ModelSerializer):
+class CreateOrderSerializer(serializers.Serializer):
     restaurant = serializers.IntegerField()
-    dishorders = DishOrderSerializer(many=True)
+    dishorders = serializers.ListField(child=DishOrderSerializer())
     deliverer =  serializers.IntegerField()
     customer = serializers.IntegerField()
     

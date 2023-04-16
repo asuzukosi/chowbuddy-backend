@@ -16,8 +16,8 @@ class Meal(models.Model):
     
     def calculate_total_price(self):
         total = 0.0
-        for dish_order in self.dish_orders:
-            total += dish_order.amount
+        for dish_order in self.dish_orders.all():
+            total += float(dish_order.amount)
         return total
 class MealPlan(models.Model):
     name = models.CharField(max_length=100)
@@ -66,6 +66,7 @@ class MealOrder(models.Model):
         customer = Customer.objects.get(id=customer)
         
         for dishorder in dishorders:
+            dishorder["dish"] = Dish.objects.get(id=dishorder["dish"])
             db_dishorder = DishOrder.objects.create(**dishorder)
             meal.dish_orders.add(db_dishorder)
         meal.save()

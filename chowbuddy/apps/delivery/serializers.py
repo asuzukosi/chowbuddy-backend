@@ -1,8 +1,10 @@
 from rest_framework.serializers import ModelSerializer
 from delivery.models import Deliverer, Delivery
 from rest_framework import serializers
+from authentication.serializers import CustomBaseUserSerializer
 
 class DelivererSerializer(ModelSerializer):
+    user = CustomBaseUserSerializer()
     class Meta:
         model = Deliverer
         fields = '__all__'

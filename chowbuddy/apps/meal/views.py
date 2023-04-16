@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from meal.serializers import MealSerializer, DishOrderSerializer, MealOrderSerializer, MealPlanSerializer, CreateOrderSerializer, GetCustomerOrders, GetRestaurantOrders
+from meal.serializers import MealOrderFullSerializer, MealSerializer, DishOrderSerializer, MealOrderSerializer, MealPlanSerializer, CreateOrderSerializer, GetCustomerOrders, GetRestaurantOrders
 from meal.models import Meal, DishOrder, MealOrder, MealPlan
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
@@ -25,8 +25,8 @@ class MealOrderViewset(ModelViewSet):
     def create_order(self, request, *args, **kwargs):
         serializer = CreateOrderSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        order = MealOrder.create_order(**serializer)
-        serializer = MealOrderSerializer(instance=order)
+        order = MealOrder.create_order(**serializer.data)
+        serializer = MealOrderFullSerializer(instance=order)
         return Response(serializer.data, 200)
     
     @action(methods=["post"], detail=False)
