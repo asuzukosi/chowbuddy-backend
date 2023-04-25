@@ -19,6 +19,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 urlpatterns = [
      # YOUR PATTERNS
     path('', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
